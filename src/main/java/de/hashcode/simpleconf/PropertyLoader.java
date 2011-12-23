@@ -13,6 +13,7 @@
  */
 package de.hashcode.simpleconf;
 
+import java.io.Closeable;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
@@ -25,8 +26,6 @@ import java.util.logging.Logger;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
-import org.apache.commons.io.IOUtils;
 
 /**
  * Loads properties from one or more {@link PropertyLocation}s and writes them
@@ -148,10 +147,20 @@ public final class PropertyLoader {
 					String.format("IO Error on file from %s.",
 							location.getName()));
 		} finally {
-			IOUtils.closeQuietly(inputStream);
+			closeQuietly(inputStream);
 		}
 
 		return properties;
 	}
+	
+    private static void closeQuietly(Closeable closeable) {
+        try {
+            if (closeable != null) {
+                closeable.close();
+            }
+        } catch (IOException ioe) {
+            // ignore
+        }
+    }
 
 }
