@@ -28,8 +28,6 @@ import javax.annotation.Nullable;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-import org.apache.commons.lang.UnhandledException;
-
 /**
  * Reads some properties files on context startup and provides these properties
  * via system properties. First off, a file provided via a system property is
@@ -180,6 +178,6 @@ public class ApplicationPropertiesListener implements ServletContextListener {
 	private void logAndRethrow(@Nonnull final Throwable e) {
 		LOG.log(Level.SEVERE, "Error during initialization", e);
 		throw e instanceof RuntimeException ? (RuntimeException) e
-				: new UnhandledException(e);
+				: new RuntimeException("An error occurred when trying to load properties.", e);
 	}
 }
