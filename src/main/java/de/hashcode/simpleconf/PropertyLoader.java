@@ -1,5 +1,19 @@
+/**
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *         http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package de.hashcode.simpleconf;
 
+import java.io.Closeable;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
@@ -13,8 +27,6 @@ import java.util.logging.Logger;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import org.apache.commons.io.IOUtils;
-
 /**
  * Loads properties from one or more {@link PropertyLocation}s and writes them
  * to system properties.
@@ -25,7 +37,7 @@ import org.apache.commons.io.IOUtils;
 public final class PropertyLoader {
 
 	private static final Logger LOG = Logger
-			.getLogger("de.hashcode.simpleconf.PropertyLoader");
+			.getLogger(PropertyLoader.class.getName());
 
 	/**
 	 * Non instantiable.
@@ -135,10 +147,20 @@ public final class PropertyLoader {
 					String.format("IO Error on file from %s.",
 							location.getName()));
 		} finally {
-			IOUtils.closeQuietly(inputStream);
+			closeQuietly(inputStream);
 		}
 
 		return properties;
 	}
+	
+    private static void closeQuietly(Closeable closeable) {
+        try {
+            if (closeable != null) {
+                closeable.close();
+            }
+        } catch (IOException ioe) {
+            // ignore
+        }
+    }
 
 }
