@@ -1,0 +1,2 @@
+- Hint on jul-over-slf4j bridge
+- default locations
