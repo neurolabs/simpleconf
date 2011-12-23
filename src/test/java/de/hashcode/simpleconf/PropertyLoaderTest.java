@@ -56,7 +56,6 @@ public class PropertyLoaderTest {
 
 		public TestPropertyLocation(boolean isXml, String content) {
 			this.isXml = isXml;
-			// TODO Auto-generated constructor stub
 			this.content = content;
 		}
 
