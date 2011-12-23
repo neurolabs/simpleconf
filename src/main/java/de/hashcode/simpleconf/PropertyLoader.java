@@ -38,7 +38,7 @@ import org.apache.commons.io.IOUtils;
 public final class PropertyLoader {
 
 	private static final Logger LOG = Logger
-			.getLogger("de.hashcode.simpleconf.PropertyLoader");
+			.getLogger(PropertyLoader.class.getName());
 
 	/**
 	 * Non instantiable.

@@ -40,7 +40,7 @@ import org.apache.commons.lang.UnhandledException;
 public class ApplicationPropertiesListener implements ServletContextListener {
 
 	private static final Logger LOG = Logger
-			.getLogger("de.hashcode.simpleconf");
+			.getLogger(ApplicationPropertiesListener.class.getName());
 
 	/**
 	 * Types of configuration locations.
